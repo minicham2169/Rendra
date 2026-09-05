@@ -1,0 +1,5 @@
+class ChangeTimeToIntegerInTweets < ActiveRecord::Migration[7.2]
+  def change
+    change_column :tweets, :time, :integer
+  end
+end

@@ -1,0 +1,38 @@
+<h1>おすすめのドライブスポット</h1>
+
+<% if @tweets.present? %>
+  <% @tweets.each do |tweet| %>
+    <% access = tweet.accesses.find_by(
+      departure_area: @departure_area
+    ) %>
+
+    <div class="spot">
+      <h2><%= link_to tweet.name, tweet_path(tweet) %></h2>
+
+      <p>住所：<%= tweet.address %></p>
+      <p>ジャンル：<%= tweet.category %></p>
+      <p>およその距離：<%= access.distance %>km</p>
+      <p>
+        およその所要時間：
+        <%= access.required_time / 60 %>時間
+        <%= access.required_time % 60 %>分
+      </p>
+      <% if user_signed_in? %>
+        <%= form_with url: histories_path, method: :post do |f| %>
+          <%= hidden_field_tag "history[tweet_id]", tweet.id %>
+          <%= hidden_field_tag "history[departure_area]", @departure_area %>
+          <%= hidden_field_tag "history[distance]", @distance %>
+          <%= hidden_field_tag "history[required_time]", @required_time %>
+          <%= hidden_field_tag "history[kinds_place]", tweet.kinds_place %>
+          <%= hidden_field_tag "history[target]", tweet.target %>
+          <%= f.submit "この行き先に決める" %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <p>条件に合うスポットがありませんでした。</p>
+  <p>時間や距離を広げて、もう一度試してみてね！</p>
+<% end %>
+
+<%= link_to "診断をやり直す", diagnoses_index_path %>

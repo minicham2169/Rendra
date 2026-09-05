@@ -1,0 +1,72 @@
+<h1>ドライブ先診断</h1>
+
+<%= form_with url: diagnoses_result_path, method: :get do |f| %>
+  <div class="field">
+    <%= f.label :departure_area, "どこから出発しますか？" %>
+    <%= f.select :departure_area,
+      [
+        ["札幌", "札幌"],
+        ["仙台", "仙台"],
+        ["東京", "東京"],
+        ["名古屋", "名古屋"],
+        ["大阪", "大阪"],
+        ["広島", "広島"],
+        ["福岡", "福岡"],
+        ["那覇", "那覇"]
+      ],
+      { include_blank: "選択してください" },
+      required: true %>
+  </div>
+
+  
+
+  <div class="field">
+    <%= f.label :kinds_place, "どんな場所に行きたい？" %>
+    <%= f.select :kinds_place,
+      [
+        ["海", "海"],
+        ["自然", "自然"],
+        ["温泉", "温泉"],
+        ["夜景", "夜景"],
+        ["グルメ", "グルメ"]
+      ],
+      { include_blank: "こだわらない" } %>
+  </div>
+
+  <div class="field">
+    <%= f.label :target, "誰と行く？" %>
+    <%= f.select :target,
+      [
+        ["男同士", "男同士"],
+        ["女同士", "女同士"],
+        ["男女混合", "男女混合"],
+        ["デート", "デート"],
+        ["家族旅行", "家族旅行"]
+      ],
+      { include_blank: "こだわらない" } %>
+  </div>
+
+  <div class="field">
+  <%= f.label :season, "どの季節に行きたい？" %>
+  <%= f.select :season,
+    [
+      ["春", "春"],
+      ["夏", "夏"],
+      ["秋", "秋"],
+      ["冬", "冬"]
+    ],
+    { include_blank: "こだわらない" } %>
+</div>
+
+<div class="field">
+  <%= f.label :indoor_outdoor, "屋内・屋外どちらがいい？" %>
+  <%= f.select :indoor_outdoor,
+    [
+      ["屋内", "屋内"],
+      ["屋外", "屋外"]
+    ],
+    { include_blank: "こだわらない" } %>
+</div>
+
+  <%= f.submit "おすすめを見る" %>
+<% end %>

@@ -1,0 +1,84 @@
+<div class="post-container">
+  <%= form_with model: tweet, local: true do |f| %>
+    <div class="field">
+      <%= f.label :場所名 %>
+      <%= f.text_field :name, :size => 30 %>
+    </div>
+
+    <div class="field">
+      <%= f.label :エリア %>
+      <%= f.select :address,
+        [
+          ["札幌", "札幌"],
+          ["仙台", "仙台"],
+          ["東京", "東京"],
+          ["名古屋", "名古屋"],
+          ["大阪", "大阪"],
+          ["広島", "広島"],
+          ["福岡", "福岡"],
+          ["那覇", "那覇"]
+        ], include_blank: "選択して下さい" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :画像 %>
+      <%= f.file_field :image %>
+    </div>
+
+    <div class="field">
+      <%= f.label :コメント %>
+      <%= f.text_area :comment, :size => "30x2" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :ジャンル %>
+      <%= f.select :kinds_place,
+        [
+          ["海", "海"],
+          ["自然", "自然"],
+          ["温泉", "温泉"],
+          ["夜景", "夜景"],
+          ["グルメ", "グルメ"]
+        ], include_blank: "選択して下さい" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :対象 %>
+      <%= f.select :target,
+        [
+          ["男同士", "男同士"],
+          ["女同士", "女同士"],
+          ["男女混合", "男女混合"],
+          ["デート", "デート"],
+          ["家族旅行", "家族旅行"]
+        ], include_blank: "選択して下さい" %>
+    </div>
+
+   <div class="field">
+  <%= f.label :season, "おすすめの季節" %>
+  <%= f.select :season,
+    [
+      ["春", "春"],
+      ["夏", "夏"],
+      ["秋", "秋"],
+      ["冬", "冬"],
+      ["オールシーズン", "オールシーズン"]
+    ], include_blank: "選択して下さい" %>
+</div>
+
+<div class="field">
+  <%= f.label :indoor_outdoor, "屋内・屋外" %>
+  <%= f.select :indoor_outdoor,
+    [
+      ["屋内", "屋内"],
+      ["屋外", "屋外"],
+      ["どちらもあり", "どちらもあり"]
+    ], include_blank: "選択して下さい" %>
+</div>
+
+   
+
+    <%= f.submit %>
+  <% end %>
+  <%= link_to "一覧に戻る", tweets_path %>
+</div>

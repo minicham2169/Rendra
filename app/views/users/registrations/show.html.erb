@@ -1,0 +1,8 @@
+<h3 class="title">過去の行き先</h3>
+<% @histories.each do |history| %>
+  <div class="field">
+    <p><%= link_to history.tweet.name, tweet_path(history.tweet) %></p>
+    <p><%= history.departure_area %>から <%= history.distance %>km・<%= history.kinds_place %></p>
+    <p><%= history.created_at.strftime("%Y/%m/%d") %></p>
+  </div>
+<% end %>

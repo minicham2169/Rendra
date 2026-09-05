@@ -1,0 +1,29 @@
+<%= form_with model: [@tweet, @access] do |f| %>
+  <div class="field">
+    <%= f.label :departure_area, "出発都市" %>
+    <%= f.select :departure_area,
+      [
+        ["札幌", "札幌"],
+        ["仙台", "仙台"],
+        ["東京", "東京"],
+        ["名古屋", "名古屋"],
+        ["大阪", "大阪"],
+        ["広島", "広島"],
+        ["福岡", "福岡"],
+        ["那覇", "那覇"]
+      ],
+      { include_blank: "選択してください" } %>
+  </div>
+
+  <div class="field">
+    <%= f.label :distance, "およその片道距離（km）" %>
+    <%= f.number_field :distance, min: 0, step:10%>
+  </div>
+
+  <div class="field">
+    <%= f.label :required_time, "およその片道所要時間（分）" %>
+    <%= f.number_field :required_time, min: 0, step:10%>
+  </div>
+
+  <%= f.submit "アクセス情報を登録" %>
+<% end %>
