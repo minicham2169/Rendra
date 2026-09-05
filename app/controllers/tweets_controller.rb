@@ -50,6 +50,12 @@ end
 
     private
     def tweet_params
-        params.require(:tweet).permit(:name, :address, :image,:comment,:kinds_place,:target,:nearest,:time)
+  params.require(:tweet).permit(
+    :name, :address, :image, :comment,
+    :nearest, :time, :indoor_outdoor,
+    kinds_place: [],
+    target: [],
+    season: []
+  )
     end
 end

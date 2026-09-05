@@ -31,39 +31,36 @@
     </div>
 
     <div class="field">
-      <%= f.label :ジャンル %>
-      <%= f.select :kinds_place,
-        [
-          ["海", "海"],
-          ["自然", "自然"],
-          ["温泉", "温泉"],
-          ["夜景", "夜景"],
-          ["グルメ", "グルメ"]
-        ], include_blank: "選択して下さい" %>
-    </div>
+  <%= f.label :kinds_place, "ジャンル（複数選択可）" %><br>
+  <% ["海", "自然", "温泉", "夜景", "グルメ"].each do |genre| %>
+    <label>
+      <%= check_box_tag "tweet[kinds_place][]", genre, f.object.kinds_place_array.include?(genre) %>
+      <%= genre %>
+    </label>
+  <% end %>
+  <%= hidden_field_tag "tweet[kinds_place][]", "" %>
+</div>
 
-    <div class="field">
-      <%= f.label :対象 %>
-      <%= f.select :target,
-        [
-          ["男同士", "男同士"],
-          ["女同士", "女同士"],
-          ["男女混合", "男女混合"],
-          ["デート", "デート"],
-          ["家族旅行", "家族旅行"]
-        ], include_blank: "選択して下さい" %>
-    </div>
+<div class="field">
+  <%= f.label :target, "対象（複数選択可）" %><br>
+  <% ["男同士", "女同士", "男女混合", "デート", "家族旅行"].each do |t| %>
+    <label>
+      <%= check_box_tag "tweet[target][]", t, f.object.target_array.include?(t) %>
+      <%= t %>
+    </label>
+  <% end %>
+  <%= hidden_field_tag "tweet[target][]", "" %>
+</div>
 
-   <div class="field">
-  <%= f.label :season, "おすすめの季節" %>
-  <%= f.select :season,
-    [
-      ["春", "春"],
-      ["夏", "夏"],
-      ["秋", "秋"],
-      ["冬", "冬"],
-      ["オールシーズン", "オールシーズン"]
-    ], include_blank: "選択して下さい" %>
+ <div class="field">
+  <%= f.label :season, "おすすめの季節（複数選択可）" %><br>
+  <% ["春", "夏", "秋", "冬"].each do |s| %>
+    <label>
+      <%= check_box_tag "tweet[season][]", s, f.object.season_array.include?(s) %>
+      <%= s %>
+    </label>
+  <% end %>
+  <%= hidden_field_tag "tweet[season][]", "" %>
 </div>
 
 <div class="field">

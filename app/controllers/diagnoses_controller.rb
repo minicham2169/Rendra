@@ -14,17 +14,17 @@ class DiagnosesController < ApplicationController
                    departure_area: @departure_area
                  })
 
-  if @kinds_place.present?
-    @tweets = @tweets.where(kinds_place: @kinds_place)
-  end
+ if @kinds_place.present?
+  @tweets = @tweets.where("kinds_place LIKE ?", "%#{@kinds_place}%")
+end
 
-  if @target.present?
-    @tweets = @tweets.where(target: @target)
-  end
-
-  if @season.present?
-    @tweets = @tweets.where(season: [@season, "オールシーズン"])
-  end
+if @target.present?
+  @tweets = @tweets.where("target LIKE ?", "%#{@target}%")
+end
+ @tweets = @tweets.where(
+  "season LIKE ? OR season = '' OR season IS NULL",
+  "%#{@season}%"
+)
 
   if @indoor_outdoor.present?
     @tweets = @tweets.where(indoor_outdoor: [@indoor_outdoor, "どちらもあり"])
