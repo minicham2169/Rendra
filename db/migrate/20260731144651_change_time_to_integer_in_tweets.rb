@@ -10,6 +10,6 @@ class ChangeTimeToIntegerInTweets < ActiveRecord::Migration[7.2]
     change_column :tweets,
                   :time,
                   :time,
-                  :using: '(TIME \'00:00:00\' + "time" * INTERVAL \'1 minute\')'
+                  using: '(TIME \'00:00:00\' + "time" * INTERVAL \'1 minute\')'
   end
 end
