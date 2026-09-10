@@ -1,16 +1,21 @@
-<h1>rendra</h1>
-<h3>一覧ページ</h3>
+<div class="hero">
+<h2 class="hero-title">レンタカーでドライブに行くあなたのためのサイト</h2>
+</div>
+
+
+
 <h3>投稿を検索</h3>
  <%= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
    <%= text_field_tag :search %>
    <%= submit_tag '検索する'  %>
-   <% end %>
-   <%= link_to "新規投稿へ", new_tweet_path %>
+ <% end %>
+
+<div class="banner-group">
+  <%= link_to "ドライブ行き先診断", diagnoses_index_path, class: "banner-link" %>
+  <%= link_to "新規投稿へ", new_tweet_path, class: "banner-link" %>
+</div>
+
 <div class="tweets-container">
-<%= link_to "ドライブ行き先診断", diagnoses_index_path %>
-<% if user_signed_in? %>
-  <%= link_to "マイページへ", user_path(current_user.id) %>
-<% end %>
   <% @tweets.each do |t| %>
     <div class="tweet">
     <% if t.image.attached? %>

@@ -31,51 +31,61 @@
     </div>
 
     <div class="field">
-  <%= f.label :kinds_place, "ジャンル（複数選択可）" %><br>
-  <% ["海", "自然", "温泉", "夜景", "グルメ"].each do |genre| %>
-    <label>
-      <%= check_box_tag "tweet[kinds_place][]", genre, f.object.kinds_place_array.include?(genre) %>
-      <%= genre %>
-    </label>
+      <%= f.label :kinds_place, "ジャンル（複数選択可）" %>
+      <div class="icon-checkbox-group">
+        <% ["海", "自然", "温泉", "夜景", "グルメ"].each_with_index do |genre, i| %>
+          <label class="icon-checkbox">
+            <%= check_box_tag "tweet[kinds_place][]", genre, f.object.kinds_place_array.include?(genre), id: "kinds_place_#{i}" %>
+            <span class="icon-circle"><%= car_icon_svg %></span>
+            <span class="icon-label-text"><%= genre %></span>
+          </label>
+        <% end %>
+      </div>
+      <%= hidden_field_tag "tweet[kinds_place][]", "" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :target, "対象（複数選択可）" %>
+      <div class="icon-checkbox-group">
+        <% ["男同士", "女同士", "男女混合", "デート", "家族旅行"].each_with_index do |t, i| %>
+          <label class="icon-checkbox">
+            <%= check_box_tag "tweet[target][]", t, f.object.target_array.include?(t), id: "target_#{i}" %>
+            <span class="icon-circle"><%= car_icon_svg %></span>
+            <span class="icon-label-text"><%= t %></span>
+          </label>
+        <% end %>
+      </div>
+      <%= hidden_field_tag "tweet[target][]", "" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :season, "おすすめの季節（複数選択可）" %>
+      <div class="icon-checkbox-group">
+        <% ["春", "夏", "秋", "冬"].each_with_index do |s, i| %>
+          <label class="icon-checkbox">
+            <%= check_box_tag "tweet[season][]", s, f.object.season_array.include?(s), id: "season_#{i}" %>
+            <span class="icon-circle"><%= car_icon_svg %></span>
+            <span class="icon-label-text"><%= s %></span>
+          </label>
+        <% end %>
+      </div>
+      <%= hidden_field_tag "tweet[season][]", "" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :indoor_outdoor, "屋内・屋外" %>
+      <div class="icon-radio-group">
+        <% [["屋内", "屋内"], ["屋外", "屋外"], ["どちらもあり", "どちらもあり"]].each_with_index do |(label, value), i| %>
+          <label class="icon-checkbox">
+            <%= f.radio_button :indoor_outdoor, value, id: "indoor_outdoor_#{i}" %>
+            <span class="icon-circle"><%= car_icon_svg %></span>
+            <span class="icon-label-text"><%= label %></span>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <%= f.submit "投稿する" %>
   <% end %>
-  <%= hidden_field_tag "tweet[kinds_place][]", "" %>
-</div>
-
-<div class="field">
-  <%= f.label :target, "対象（複数選択可）" %><br>
-  <% ["男同士", "女同士", "男女混合", "デート", "家族旅行"].each do |t| %>
-    <label>
-      <%= check_box_tag "tweet[target][]", t, f.object.target_array.include?(t) %>
-      <%= t %>
-    </label>
-  <% end %>
-  <%= hidden_field_tag "tweet[target][]", "" %>
-</div>
-
- <div class="field">
-  <%= f.label :season, "おすすめの季節（複数選択可）" %><br>
-  <% ["春", "夏", "秋", "冬"].each do |s| %>
-    <label>
-      <%= check_box_tag "tweet[season][]", s, f.object.season_array.include?(s) %>
-      <%= s %>
-    </label>
-  <% end %>
-  <%= hidden_field_tag "tweet[season][]", "" %>
-</div>
-
-<div class="field">
-  <%= f.label :indoor_outdoor, "屋内・屋外" %>
-  <%= f.select :indoor_outdoor,
-    [
-      ["屋内", "屋内"],
-      ["屋外", "屋外"],
-      ["どちらもあり", "どちらもあり"]
-    ], include_blank: "選択して下さい" %>
-</div>
-
-   
-
-    <%= f.submit %>
-  <% end %>
-  <%= link_to "一覧に戻る", tweets_path %>
+  <%= link_to "一覧に戻る", tweets_path, class: "back-button" %>
 </div>
