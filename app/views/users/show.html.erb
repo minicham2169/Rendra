@@ -1,20 +1,54 @@
-<h1>ユーザーネーム</h1>
-<p>名前 : <%= @user.name %></p>
-<p>メールアドレス : <%= @user.email %></p>
-<p>プロフィール : <%= @user.profile %></p>
-
-<% if current_user.id == @user.id %>
-  <%= link_to "編集する", edit_user_registration_path %>
-<% end %>
-
-<h2>ユーザーの投稿一覧</h2>
-<% @user.tweets.each do |t| %>
-  <%= t.user.name %>
-  <%= t.comment %>
-<% end %>
+<h1 class="title">ユーザーネーム</h1>
 
 <% if @user.image.attached? %>
-     <%= image_tag  @user.image, size: '250x200'%>
+  <%= image_tag @user.image, size: '250x200', class: "user-avatar" %>
 <% end %>
 
-<%= link_to "Tweet一覧に戻る", tweets_path %>
+<div class="profile-info">
+  <div class="profile-row">
+    <span class="profile-label">名前</span>
+    <span class="profile-value"><%= @user.name %></span>
+  </div>
+  <div class="profile-row">
+    <span class="profile-label">メールアドレス</span>
+    <span class="profile-value"><%= @user.email %></span>
+  </div>
+  <div class="profile-row">
+    <span class="profile-label">プロフィール</span>
+    <span class="profile-value"><%= @user.profile %></span>
+  </div>
+</div>
+
+<% if current_user.id == @user.id %>
+  <%= link_to "編集する", edit_user_registration_path, class: "small-button" %>
+<% end %>
+
+<h2 class="title">ユーザーの投稿一覧</h2>
+<div class="tweets-container">
+  <% @user.tweets.each do |t| %>
+    <div class="tweet">
+      <%= t.user.name %>
+      <%= t.comment %>
+    </div>
+  <% end %>
+</div>
+
+<h2 class="title">過去の診断履歴</h2>
+<% if @histories.present? %>
+  <div class="tweets-container">
+    <% @histories.each do |history| %>
+      <div class="tweet">
+        <h3><%= link_to history.tweet.name, tweet_path(history.tweet) %></h3>
+        <p>出発地：<%= history.departure_area %></p>
+        <p>ジャンル：<%= history.kinds_place %></p>
+        <p>対象：<%= history.target %></p>
+        <p>診断日：<%= history.created_at.strftime("%Y/%m/%d") %></p>
+        <%= link_to "この履歴を削除", history_path(history), data: { turbo_method: :delete, turbo_confirm: "この履歴を削除しますか？" }, class: "danger-button" %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>まだ診断履歴がありません。</p>
+<% end %>
+
+<%= link_to "Tweet一覧に戻る", tweets_path, class: "back-button" %>

@@ -1,73 +1,79 @@
 <div class="post-container">
-<h1>ドライブ先診断</h1>
+  <h1 class="title">ドライブ先診断</h1>
 
-<%= form_with url: diagnoses_result_path, method: :get do |f| %>
-  <div class="field">
-    <%= f.label :departure_area, "どこから出発しますか？" %>
-    <%= f.select :departure_area,
-      [
-        ["札幌", "札幌"],
-        ["仙台", "仙台"],
-        ["東京", "東京"],
-        ["名古屋", "名古屋"],
-        ["大阪", "大阪"],
-        ["広島", "広島"],
-        ["福岡", "福岡"],
-        ["那覇", "那覇"]
-      ],
-      { include_blank: "選択してください" },
-      required: true %>
-  </div>
+  <%= form_with url: diagnoses_result_path, method: :get do |f| %>
+    <div class="field">
+      <%= f.label :departure_area, "どこから出発しますか？" %>
+      <%= render "shared/japan_map", field_name: "departure_area", selected_value: nil, map_id: "diag_map" %>
+    </div>
 
-  
+    <div class="field">
+      <%= f.label :kinds_place, "どんな場所に行きたい？" %>
+      <div class="icon-checkbox-group">
+        <% ["海", "自然", "温泉", "夜景", "グルメ"].each_with_index do |genre, i| %>
+          <label class="icon-checkbox">
+            <%= check_box_tag "kinds_place", genre, false, id: "diag_kinds_place_#{i}" %>
+            <span class="icon-circle"><%= car_icon_svg %></span>
+            <span class="icon-label-text"><%= genre %></span>
+          </label>
+        <% end %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :kinds_place, "どんな場所に行きたい？" %>
-    <%= f.select :kinds_place,
-      [
-        ["海", "海"],
-        ["自然", "自然"],
-        ["温泉", "温泉"],
-        ["夜景", "夜景"],
-        ["グルメ", "グルメ"]
-      ],
-      { include_blank: "こだわらない" } %>
-  </div>
+    <div class="field">
+      <%= f.label :target, "誰と行く？" %>
+      <div class="icon-checkbox-group">
+        <% ["男同士", "女同士", "男女混合", "デート", "家族旅行"].each_with_index do |t, i| %>
+          <label class="icon-checkbox">
+            <%= check_box_tag "target", t, false, id: "diag_target_#{i}" %>
+            <span class="icon-circle"><%= car_icon_svg %></span>
+            <span class="icon-label-text"><%= t %></span>
+          </label>
+        <% end %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :target, "誰と行く？" %>
-    <%= f.select :target,
-      [
-        ["男同士", "男同士"],
-        ["女同士", "女同士"],
-        ["男女混合", "男女混合"],
-        ["デート", "デート"],
-        ["家族旅行", "家族旅行"]
-      ],
-      { include_blank: "こだわらない" } %>
-  </div>
+    <div class="field">
+      <%= f.label :season, "どの季節に行きたい？" %>
+      <div class="icon-checkbox-group">
+        <% ["春", "夏", "秋", "冬"].each_with_index do |s, i| %>
+          <label class="icon-checkbox">
+            <%= check_box_tag "season", s, false, id: "diag_season_#{i}" %>
+            <span class="icon-circle"><%= car_icon_svg %></span>
+            <span class="icon-label-text"><%= s %></span>
+          </label>
+        <% end %>
+      </div>
+    </div>
 
-  <div class="field">
-  <%= f.label :season, "どの季節に行きたい？" %>
-  <%= f.select :season,
-    [
-      ["春", "春"],
-      ["夏", "夏"],
-      ["秋", "秋"],
-      ["冬", "冬"]
-    ],
-    { include_blank: "こだわらない" } %>
+    <div class="field">
+      <%= f.label :indoor_outdoor, "屋内・屋外どちらがいい？" %>
+      <div class="icon-radio-group">
+        <% ["屋内", "屋外"].each_with_index do |v, i| %>
+          <label class="icon-checkbox">
+            <%= radio_button_tag "indoor_outdoor", v, false, id: "diag_indoor_outdoor_#{i}" %>
+            <span class="icon-circle"><%= car_icon_svg %></span>
+            <span class="icon-label-text"><%= v %></span>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <%= f.submit "おすすめを見る" %>
+  <% end %>
 </div>
 
-<div class="field">
-  <%= f.label :indoor_outdoor, "屋内・屋外どちらがいい？" %>
-  <%= f.select :indoor_outdoor,
-    [
-      ["屋内", "屋内"],
-      ["屋外", "屋外"]
-    ],
-    { include_blank: "こだわらない" } %>
-</div>
-
-  <%= f.submit "おすすめを見る" %>
-<% end %>
+<script>
+  document.querySelectorAll('.icon-checkbox-group, .icon-radio-group').forEach(function(group) {
+    const boxes = group.querySelectorAll('input[type="checkbox"], input[type="radio"]');
+    boxes.forEach(function(box) {
+      box.addEventListener('change', function() {
+        if (box.checked) {
+          boxes.forEach(function(other) {
+            if (other !== box) other.checked = false;
+          });
+        }
+      });
+    });
+  });
+</script>

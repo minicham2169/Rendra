@@ -22,14 +22,7 @@ body {
   font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ",
     Meiryo, "ＭＳ Ｐゴシック", sans-serif;
 }
-header {
-  background-color: #00acee;
-  height: 80px;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 header a {
   color: white; 
   text-decoration: none; 
@@ -71,8 +64,13 @@ body {
 
 /* ===== ヘッダー ===== */
 header {
-  background: linear-gradient(90deg, #0b3d91, #1e90ff);
-  padding: 16px 24px;
+  background-image:
+    linear-gradient(rgba(11, 61, 145, 0.6), rgba(30, 144, 255, 0.6)),
+    url("https://images.unsplash.com/photo-1563161084-b4c9f34d60ae?w=1600&auto=format&fit=crop&q=80");
+  background-size: cover;
+  background-position: center;
+  padding: 32px 28px;
+  min-height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -331,6 +329,7 @@ main > a:hover,
   margin-bottom: 6px;
   font-weight: bold;
   font-size: 18px;
+  text-align: center;
 }
 
 .field input[type="text"],
@@ -465,4 +464,113 @@ main > a:hover,
 
 .genre-icon:hover {
   transform: translateY(-4px);
+}
+
+/* ===== プロフィール情報 ===== */
+.user-avatar {
+  display: block;
+  margin: 16px auto;
+  border-radius: 30%;
+  object-fit: cover;
+}
+
+.profile-info {
+  max-width: 500px;
+  margin: 24px auto;
+}
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e0eeff;
+}
+
+.profile-label {
+  width: 140px;
+  flex-shrink: 0;
+  font-weight: bold;
+  color: #0b3d91;
+  font-size: 14px;
+}
+
+.profile-value {
+  color: #1a3a5c;
+  font-size: 15px;
+}
+/* ===== 小さめのボタン(編集するなど) ===== */
+.small-button {
+  display: block;
+  width: fit-content;
+  margin: 16px auto;
+  color: #ffffff;
+  background: linear-gradient(90deg, #1e90ff, #0b3d91);
+  padding: 12px 36px;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 3px 10px rgba(11, 61, 145, 0.3);
+}
+
+.small-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(11, 61, 145, 0.4);
+}
+
+/* ===== フォームの注釈文 ===== */
+.field-note {
+  font-size: 12px;
+  color: #6b8bb5;
+  margin: 2px 0 6px;
+}
+
+/* ===== 退会エリア ===== */
+.cancel-account {
+  text-align: center;
+  margin: 24px 0;
+}
+
+.danger-button {
+  display: inline-block;
+  background: #ffffff;
+  color: #d64545;
+  border: 1px solid #d64545;
+  padding: 8px 24px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.danger-button:hover {
+  background: #fdeaea;
+}
+
+
+/* ===== 日本地図セレクター ===== */
+.japan-map-wrapper {
+  text-align: center;
+  margin: 8px 0;
+}
+
+.japan-map-svg {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.city-marker:hover .city-dot {
+  fill: #6bb3ff;
+  transition: fill 0.2s;
+}
+
+.map-selected-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #0b3d91;
+  margin-bottom: 8px;
 }

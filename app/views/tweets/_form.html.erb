@@ -6,19 +6,9 @@
     </div>
 
     <div class="field">
-      <%= f.label :エリア %>
-      <%= f.select :address,
-        [
-          ["札幌", "札幌"],
-          ["仙台", "仙台"],
-          ["東京", "東京"],
-          ["名古屋", "名古屋"],
-          ["大阪", "大阪"],
-          ["広島", "広島"],
-          ["福岡", "福岡"],
-          ["那覇", "那覇"]
-        ], include_blank: "選択して下さい" %>
-    </div>
+  <%= f.label :address, "エリア" %>
+  <%= render "shared/japan_map", field_name: "tweet[address]", selected_value: f.object.address, map_id: "tweet_map" %>
+</div>
 
     <div class="field">
       <%= f.label :画像 %>
