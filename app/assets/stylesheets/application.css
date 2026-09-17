@@ -56,7 +56,7 @@ footer {
 
 /* ===== 全体の背景・フォント ===== */
 body {
-  background: linear-gradient(180deg, #eaf4ff 0%, #ffffff 300px);
+  background: linear-gradient(180deg, #ffffff 0%, #d5f4f8 300px);
   font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
   color: #1a3a5c;
   margin: 0;
@@ -79,7 +79,7 @@ header {
 
 header h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 42px;
 }
 
 header h1 a {
@@ -550,18 +550,7 @@ main > a:hover,
 
 
 /* ===== 日本地図セレクター ===== */
-.japan-map-wrapper {
-  text-align: center;
-  margin: 8px 0;
-}
 
-.japan-map-svg {
-  width: 100%;
-  max-width: 320px;
-  height: auto;
-  margin: 0 auto;
-  display: block;
-}
 
 .city-marker:hover .city-dot {
   fill: #6bb3ff;
@@ -573,4 +562,137 @@ main > a:hover,
   font-weight: bold;
   color: #0b3d91;
   margin-bottom: 8px;
+}
+/* ===== 日本地図コンテナ ===== */
+.japan-map-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 160px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 3px 10px rgba(30, 90, 160, 0.15);
+  border: 1px solid #e0eeff;
+}
+
+.japan-map-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.map-city-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+}
+
+.pin-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #b8c6d9;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s, transform 0.15s;
+  display: block;
+}
+
+.pin-dot.active {
+  background: #1e90ff;
+  transform: scale(1.3);
+  box-shadow: 0 2px 8px rgba(30, 144, 255, 0.5);
+}
+
+.pin-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #0b3d91;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 3px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.pin-label.active {
+  background: #1e90ff;
+  color: #ffffff;
+}
+
+.map-city-pin:hover .pin-dot {
+  background: #6bb3ff;
+  transform: scale(1.2);
+}
+
+.map-city-pin:hover .pin-label {
+  background: #e0eeff;
+}
+
+/* ===== 投稿カードの各項目 ===== */
+.tweet-title {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.tweet-title a {
+  font-size: 20px;
+  color: #0b3d91;
+  text-decoration: none;
+}
+
+.tweet-title a:hover {
+  text-decoration: underline;
+}
+
+.tweet-info {
+  margin: 8px 0 12px;
+}
+
+.tweet-row {
+  display: flex;
+  padding: 6px 0;
+  border-bottom: 1px solid #e0eeff;
+}
+
+.tweet-label {
+  width: 100px;
+  flex-shrink: 0;
+  font-weight: bold;
+  color: #0b3d91;
+  font-size: 14px;
+}
+
+.tweet-value {
+  color: #1a3a5c;
+  font-size: 14px;
+}
+
+.tweet-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #e0eeff;
+}
+
+/* ===== ログイン状態を保持するチェックボックス ===== */
+.remember-me {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: normal;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+  width: auto;
+  height: auto;
 }

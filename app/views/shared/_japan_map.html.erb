@@ -3,7 +3,7 @@
   <p class="map-selected-text" id="<%= map_id %>-display">
     <%= selected_value.present? ? "選択中：#{selected_value}" : "地図から選んでください" %>
   </p>
-  <svg viewBox="0 0 400 520" class="japan-map-svg" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 550 700" class="japan-map-svg" xmlns="http://www.w3.org/2000/svg">
     <!-- 北海道 -->
     <path d="M270,30 L310,25 L340,40 L350,70 L330,90 L300,95 L280,110 L260,90 L255,60 Z" fill="#d0e4f7" stroke="#8bb0d6" stroke-width="1"/>
     <!-- 本州 -->
@@ -16,16 +16,19 @@
     <ellipse cx="95" cy="475" rx="15" ry="8" fill="#d0e4f7" stroke="#8bb0d6" stroke-width="1"/>
 
     <!-- 都市マーカー -->
-    <% cities = [
-      { name: "札幌", x: 295, y: 60 },
-      { name: "仙台", x: 305, y: 175 },
-      { name: "東京", x: 300, y: 245 },
-      { name: "名古屋", x: 255, y: 285 },
-      { name: "大阪", x: 215, y: 310 },
-      { name: "広島", x: 155, y: 320 },
-      { name: "福岡", x: 110, y: 345 },
-      { name: "那覇", x: 95, y: 475 }
-    ] %>
+   <% cities = [
+  { name: "札幌", x: 295, y: 60 },
+  { name: "仙台", x: 305, y: 175 },
+  { name: "東京", x: 300, y: 245 },
+  { name: "金沢", x: 235, y: 215 },
+  { name: "名古屋", x: 255, y: 285 },
+  { name: "京都", x: 210, y: 285 },
+  { name: "大阪", x: 195, y: 300 },
+  { name: "高松", x: 175, y: 335 },
+  { name: "広島", x: 155, y: 320 },
+  { name: "福岡", x: 110, y: 345 },
+  { name: "那覇", x: 95, y: 475 }
+] %>
 
     <% cities.each do |city| %>
       <g class="city-marker" data-city="<%= city[:name] %>" data-map="<%= map_id %>" onclick="selectCity(this)" style="cursor: pointer;">
