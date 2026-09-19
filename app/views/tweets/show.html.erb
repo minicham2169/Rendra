@@ -1,31 +1,57 @@
 <h1>Tweet詳細</h1>
 <div class="tweet">
-  <p><%= @tweet.name %></p>
-  <p><%= @tweet.address %></p>
-  <p><%= @tweet.image %></p>
-  <p><%= @tweet.comment %></p>
-  <p><%= @tweet.kinds_place %></p>
-  <p><%= @tweet.target %></p>
-  <p><%= @tweet.nearest %></p>
-  <p><%= @tweet.time %></p>
-  <p><%= @tweet.created_at %></p>
-</div>
- <p><%= @tweet.comment %></p>
-  <p><%= @tweet.created_at %></p>
+  <% if @tweet.image.attached? %>
+    <%= image_tag @tweet.image, size: '250x200' %>
+  <% end %>
+  <h2 class="tweet-title"><%= @tweet.name %></h2>
+
+  <div class="tweet-info">
+    <div class="tweet-row">
+      <span class="tweet-label">エリア</span>
+      <span class="tweet-value"><%= @tweet.address %></span>
+    </div>
+    <div class="tweet-row">
+      <span class="tweet-label">コメント</span>
+      <span class="tweet-value"><%= @tweet.comment %></span>
+    </div>
+    <div class="tweet-row">
+      <span class="tweet-label">ジャンル</span>
+      <span class="tweet-value"><%= @tweet.kinds_place %></span>
+    </div>
+    <div class="tweet-row">
+      <span class="tweet-label">対象</span>
+      <span class="tweet-value"><%= @tweet.target %></span>
+    </div>
+    <div class="tweet-row">
+      <span class="tweet-label">最寄りインター</span>
+      <span class="tweet-value"><%= @tweet.nearest %></span>
+    </div>
+    <div class="tweet-row">
+      <span class="tweet-label">所要時間</span>
+      <span class="tweet-value"><%= @tweet.time %></span>
+    </div>
+    <div class="tweet-row">
+      <span class="tweet-label">投稿日</span>
+      <span class="tweet-value"><%= @tweet.created_at.strftime("%Y/%m/%d") %></span>
+    </div>
+  </div>
+
+  <div class="tweet-actions">
     <% if user_signed_in? %>
       <% if current_user.already_liked?(@tweet) %>
         <%= link_to tweet_like_path(id: @tweet.id, tweet_id: @tweet.id), data: { turbo_method: :delete } do %>
-        <i class="fas fa-heart"></i><%= @tweet.likes.count %>  
+          <i class="fas fa-heart"></i><%= @tweet.likes.count %>
         <% end %>
       <% else %>
-        <%= link_to tweet_likes_path(id: @tweet.id, tweet_id: @tweet.id), data: { turbo_method: :post }  do %>
-        <i class="far fa-heart"></i><%= @tweet.likes.count %>  
+        <%= link_to tweet_likes_path(id: @tweet.id, tweet_id: @tweet.id), data: { turbo_method: :post } do %>
+          <i class="far fa-heart"></i><%= @tweet.likes.count %>
         <% end %>
       <% end %>
     <% else %>
-    <i class="far fa-heart"></i><%= @tweet.likes.count %>  
+      <i class="far fa-heart"></i><%= @tweet.likes.count %>
     <% end %>
-  <%= link_to "編集する", edit_tweet_path(@tweet.id) %>
+    <%= link_to "編集する", edit_tweet_path(@tweet.id) %>
+  </div>
 </div>
 
-<%= link_to "Tweet一覧に戻る", tweets_path %>
+<%= link_to "Tweet一覧に戻る", tweets_path, class: "back-button" %>
