@@ -3,6 +3,7 @@ class Tweet < ApplicationRecord
     has_one_attached :image
     has_many :likes, dependent: :destroy
     has_many :accesses, dependent: :destroy
+    has_many :histories, dependent: :destroy
     def kinds_place=(value)
     if value.is_a?(Array)
       super(value.reject(&:blank?).join(","))
